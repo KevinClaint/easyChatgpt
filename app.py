@@ -5,7 +5,9 @@ import json
 
 app = Flask(__name__)
 
-openai.api_key="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"
+# 从配置文件中settings加载配置
+app.config.from_pyfile('settings.py')
+openai.api.key = os.environ.get('OPENAI_API_KEY',app.config["OPENAI_API_KEY"])
 
 @app.route("/", methods=["GET"])
 def index():
